@@ -1,37 +1,43 @@
+// Tran, Lily (Team Leader)
+// Aljaffan, Maha
 
 // Part 1
 int hashValue(int key, int j, int capacity)
 {
-   return ( (( (3 * key) + 3 ) + j * j ) % capacity);
+   return (((3 * key) + 3) + j * j) % capacity;
 }
 
 // Part 2
-void insertKey(int table[], int capacity, 
-   int& numberOfElement, int key)
+void insertKey(int table[], int capacity,
+               int& numOfElements, int key)
 {
-   bool stop = false;
    int j = 0;
-   while (!stop && j < LIMIT)
+   bool inserted = false;
+
+   while (j < LIMIT && !inserted)
    {
       int index = hashValue(key, j, capacity);
-      if (table[index] == key)
-      {
-         cerr << "Key " << key << " is a duplicate.\n";
-         stop = true;
-      }
-      else if (table[index] == 0 || table[index] == -2)
+      if (table[index] == 0 || table[index] == -2)
       {
          table[index] = key;
-         stop = true;
-         ++numberOfElement;
+         ++numOfElements;
+         inserted = true;
+      }
+      else if (table[index] == key)
+      {
+         cerr << "Key " << key <<
+                  " is a duplicate." << endl;
+         inserted = true;
       }
       
       ++j;
    }
-   
+
    if (j == LIMIT)
+   {
       cout << "Key " << key 
-           << " not inserted. Need to rehash.\n";
+         << " not inserted. Need to rehash." << endl;
+   }
 }
 
 // Part 3
@@ -58,23 +64,28 @@ void deleteKey(int table[], int capacity,
    int& numberOfElelment, int key)
 {
    int j = 0;
-   bool stop = false;
-   while (!stop && j < LIMIT)
+   bool deleted = false;
+   bool emptyIndex = false;
+   while (!deleted && !emptyIndex && j < LIMIT)
    {
       int index = hashValue(key, j, capacity);
       if (table[index] == 0)
-         stop = true;
+      {
+         emptyIndex = true;
+      }
       else if (table[index] == key)
       {
          table[index] = -2;
-         stop = true;
+         deleted = true;
          --numberOfElelment;
       }
       
       ++j;
    }
    
-   if (j == LIMIT)
+   if (!deleted)
+   {
       cout << "Key " << key << 
-      " is not in the table.\n";
+            " is not in the table.\n";
+   }
 }
