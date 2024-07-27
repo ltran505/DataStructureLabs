@@ -7,6 +7,7 @@ void iterSwapStacks(stack<int>& firstStack, stack<int>& secondStack)
    while (!firstStack.empty())
    {
       int length = static_cast<int>(firstStack.size());
+      
       for (int i = 0; i < length; ++i)
       {
          secondStack.push(firstStack.top());
@@ -15,6 +16,7 @@ void iterSwapStacks(stack<int>& firstStack, stack<int>& secondStack)
       
       int element = secondStack.top();
       secondStack.pop();
+      
       for (int j = 0; j < length - 1; ++j)
       {
          firstStack.push(secondStack.top());
