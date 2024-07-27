@@ -1,3 +1,6 @@
+// Tran, Lily (Team Leader)
+// Aljaffan, Maha
+
 // Part 1
 void iterSwapStacks(stack<int>& firstStack, stack<int>& secondStack)
 {
